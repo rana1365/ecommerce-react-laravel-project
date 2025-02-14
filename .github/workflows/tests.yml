@@ -54,7 +54,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         php: ['8.2', '8.3', '8.4']
-        phpunit: ['^11.5.3', '^12.0']
+        phpunit: ['11.5.3', '12.0']
         dependency-version: [prefer-lowest, prefer-stable]
 
     name: PHP ${{ matrix.php }} - ${{ matrix.os }} - PHPUnit ${{ matrix.phpunit }} - ${{ matrix.dependency-version }}
