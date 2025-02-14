@@ -34,6 +34,9 @@ jobs:
       run: |
         echo "::add-matcher::${{ runner.tool_cache }}/php.json"
         echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+        
+    - name: Set Collision version
+      run: composer config version "8.x-dev"
 
     - name: Set Pest
       run: composer require pestphp/pest:^${{ matrix.pest }} --dev --no-interaction --no-update
@@ -72,6 +75,9 @@ jobs:
       run: |
         echo "::add-matcher::${{ runner.tool_cache }}/php.json"
         echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+        
+    - name: Set Collision version
+      run: composer config version "8.x-dev"
 
     - name: Set Pest
       run: composer require phpunit/phpunit:^${{ matrix.phpunit }} --dev --no-interaction --no-update
