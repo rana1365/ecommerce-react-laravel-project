@@ -7,7 +7,7 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
-  tests:
+  pest_tests:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -41,8 +41,43 @@ jobs:
     - name: Install PHP dependencies
       run: composer update --${{ matrix.dependency-version }} --no-interaction --prefer-dist --no-progress --ansi
 
-    - name: Run Unit With PHPUnit
-      run: composer test:unit:phpunit
-
     - name: Run Unit With Pest
       run: composer test:unit:pest
+
+  
+  phpunit_tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        php: ['8.2', '8.3', '8.4']
+        phpunit: ['^11.5.3', '^12.0']
+        dependency-version: [prefer-lowest, prefer-stable]
+
+    name: PHP ${{ matrix.php }} - ${{ matrix.os }} - PHPUnit ${{ matrix.phpunit }} - ${{ matrix.dependency-version }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php }}
+        extensions: dom, curl, libxml, mbstring, zip, pdo, sqlite, pdo_sqlite, gd, pdo_mysql, fileinfo, ftp, redis, memcached, gmp
+        tools: composer:v2
+        coverage: xdebug
+
+    - name: Setup Problem Matchers
+      run: |
+        echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+        echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+    - name: Set Pest
+      run: composer require phpunit/phpunit:^${{ matrix.phpunit }} --dev --no-interaction --no-update
+
+    - name: Install PHP dependencies
+      run: composer update --${{ matrix.dependency-version }} --no-interaction --prefer-dist --no-progress --ansi
+
+    - name: Run Unit With PHPUnit
+      run: composer test:unit:phpunit
