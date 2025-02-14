@@ -79,8 +79,10 @@ jobs:
     - name: Set Collision version
       run: composer config version "8.x-dev"
 
-    - name: Set Pest
-      run: composer require phpunit/phpunit:^${{ matrix.phpunit }} --dev --no-interaction --no-update
+    - name: Set PHPUnit
+      run: |
+        composer remove pestphp/pest --dev --no-interaction --no-update
+        composer require phpunit/phpunit:^${{ matrix.phpunit }} --dev --no-interaction --no-update
 
     - name: Install PHP dependencies
       run: composer update --${{ matrix.dependency-version }} --no-interaction --prefer-dist --no-progress --ansi
