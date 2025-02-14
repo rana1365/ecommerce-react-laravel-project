@@ -29,7 +29,7 @@
         "laravel/tinker": "^2.10.0",
         "laravel/sail": "^1.40.0",
         "laravel/sanctum": "^4.0.7",
-        "larastan/larastan": "^2.9.12",
+        "larastan/larastan": "^3.0",
         "orchestra/testbench-core": "^9.9.2 || ^10.0",
         "pestphp/pest": "^3.7.3",
         "sebastian/environment": "^6.1.0 || ^7.2.0 || ^8.0"
