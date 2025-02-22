@@ -76,12 +76,12 @@ jobs:
             php: '8.2'
 
     name: PHP ${{ matrix.php }} - ${{ matrix.os }} - PHPUnit ${{ matrix.phpunit }} - ${{ matrix.dependency-version }}
-    
+
     services:
       mysql:
         image: mysql:8
         env:
-          MYSQL_ALLOW_EMPTY_ROOT_PASSWORD: yes
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: laravel
         ports:
           - 3306:3306
