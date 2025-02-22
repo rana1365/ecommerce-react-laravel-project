@@ -68,6 +68,16 @@ class ArtisanTestCommandTest extends TestCase
     #[Test]
     public function test_env(): void
     {
+        if(file_exists('./vendor/bin/pest')) {
+            $this->runTests([
+                './vendor/bin/pest',
+                '-c',
+                'tests/LaravelApp/phpunit.xml',
+                '--group',
+                'environment',
+            ]);
+        }
+
         $this->runTests(['./tests/LaravelApp/artisan', 'test', '--group', 'environment']);
 
         $this->runTests(['./tests/LaravelApp/artisan', 'test', '--parallel', '--group', 'environment']);
@@ -83,6 +93,16 @@ VAR_IN_DOT_ENV_TESTING=VAL_IN_DOT_ENV_TESTING
 VAR_OVERRIDDEN_IN_PHPUNIT=VAL_THAT_SHOULD_BE_OVERRIDDEN
 EOF
         );
+
+        if(file_exists('./vendor/bin/pest')) {
+            $this->runTests([
+                './vendor/bin/pest',
+                '-c',
+                'tests/LaravelApp/phpunit.xml',
+                '--group',
+                'environmentTesting',
+            ]);
+        }
 
         $this->runTests(['./tests/LaravelApp/artisan', 'test', '--group', 'environmentTesting']);
 
@@ -100,6 +120,17 @@ EOF
     #[Test]
     public function test_extendable_custom_variables(): void
     {
+
+        if(file_exists('./vendor/bin/pest')) {
+            $this->runTests([
+                './vendor/bin/pest',
+                '-c',
+                'tests/LaravelApp/phpunit.xml',
+                '--group',
+                'environmentNoCVPhpunit',
+            ]);
+        }
+
         // Without Custom Variables (-c|--custom-argument)
         $this->runTests(['./tests/LaravelApp/artisan', 'test', '--group', 'environmentNoCVPhpunit']);
 
