@@ -15,7 +15,7 @@ jobs:
         php: ['8.2', '8.3', '8.4']
         laravel: ['11.0', '12.0']
         pest: ['3.7.2']
-        dependency-version: [prefer-lowest, prefer-stable]
+        dependency-version: [prefer-stable]
 
     name: PHP ${{ matrix.php }} - ${{ matrix.os }} - Pest ${{ matrix.pest }} - ${{ matrix.dependency-version }}
 
@@ -60,7 +60,7 @@ jobs:
         php: ['8.2', '8.3', '8.4']
         laravel: ['11.0', '12.0']
         phpunit: ['11.5.3', '12.0']
-        dependency-version: [prefer-lowest, prefer-stable]
+        dependency-version: [prefer-stable]
         exclude:
           - phpunit: '12.0'
             php: '8.2'
