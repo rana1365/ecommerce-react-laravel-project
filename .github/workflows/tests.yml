@@ -17,7 +17,7 @@ jobs:
         pest: ['3.7.2']
         dependency-version: [prefer-lowest, prefer-stable]
 
-    name: PHP ${{ matrix.php }} - ${{ matrix.os }} - Pest ${{ matrix.pest }} - ${{ matrix.dependency-version }}
+    name: PHP ${{ matrix.php }} - ${{ matrix.os }} - Pest ${{ matrix.pest }} - Laravel ${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 
     services:
       mysql:
@@ -69,13 +69,13 @@ jobs:
         os: [ubuntu-latest]
         php: ['8.2', '8.3', '8.4']
         laravel: ['11.0', '12.0']
-        phpunit: ['11.5.3', '12.0']
+        phpunit: ['11.5.9', '12.0']
         dependency-version: [prefer-lowest, prefer-stable]
         exclude:
           - phpunit: '12.0'
             php: '8.2'
 
-    name: PHP ${{ matrix.php }} - ${{ matrix.os }} - PHPUnit ${{ matrix.phpunit }} - ${{ matrix.dependency-version }}
+    name: PHP ${{ matrix.php }} - ${{ matrix.os }} - PHPUnit ${{ matrix.phpunit }} - Laravel ${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 
     services:
       mysql:
