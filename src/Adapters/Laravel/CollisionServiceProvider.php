@@ -72,7 +72,7 @@ class CollisionServiceProvider extends ServiceProvider
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @return list<class-string>
      */
     public function provides(): array
