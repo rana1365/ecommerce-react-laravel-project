@@ -228,6 +228,10 @@ EOF;
     #[Test]
     public function itHasOutputInStdoutWithBeStrictAboutOutputDuringTestsFalse(): void
     {
+        if(! file_exists('./vendor/bin/pest')) {
+            $this->markTestSkipped('Pest is not installed.');
+        }
+        
         $process = new Process([
             './vendor/bin/pest',
             '-c',
