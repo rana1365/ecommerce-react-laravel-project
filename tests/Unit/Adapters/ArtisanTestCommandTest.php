@@ -68,7 +68,7 @@ class ArtisanTestCommandTest extends TestCase
     #[Test]
     public function test_env(): void
     {
-        if(file_exists('./vendor/bin/pest')) {
+        if (file_exists('./vendor/bin/pest')) {
             $this->runTests([
                 './vendor/bin/pest',
                 '-c',
@@ -94,7 +94,7 @@ VAR_OVERRIDDEN_IN_PHPUNIT=VAL_THAT_SHOULD_BE_OVERRIDDEN
 EOF
         );
 
-        if(file_exists('./vendor/bin/pest')) {
+        if (file_exists('./vendor/bin/pest')) {
             $this->runTests([
                 './vendor/bin/pest',
                 '-c',
@@ -121,7 +121,7 @@ EOF
     public function test_extendable_custom_variables(): void
     {
 
-        if(file_exists('./vendor/bin/pest')) {
+        if (file_exists('./vendor/bin/pest')) {
             $this->runTests([
                 './vendor/bin/pest',
                 '-c',
@@ -184,10 +184,10 @@ EOF;
     #[Test]
     public function test_profile(): void
     {
-        if(! file_exists('./vendor/bin/pest')) {
+        if (! file_exists('./vendor/bin/pest')) {
             $this->markTestSkipped('Pest is not installed.');
         }
-        
+
         $output = $this->runTests([
             './vendor/bin/pest',
             '--profile',
