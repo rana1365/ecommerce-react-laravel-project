@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 class TestExceptionTest extends TestCase
 {
     #[Test]
-    public function itShortensContainsErrorMessages(): void
+    public function it_shortens_contains_error_messages(): void
     {
         $message = <<<'EOF'
   Failed asserting that 'aaa
@@ -38,7 +38,7 @@ EOF;
     }
 
     #[Test]
-    public function itShortensNotContainErrorMessages(): void
+    public function it_shortens_not_contain_error_messages(): void
     {
         $message = <<<'EOF'
   Failed asserting that 'aaa

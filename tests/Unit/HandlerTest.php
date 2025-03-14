@@ -13,7 +13,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 class HandlerTest extends TestCase
 {
     #[Test]
-    public function itSetsTheOutput(): void
+    public function it_sets_the_output(): void
     {
         $output = new ConsoleOutput;
         $handler = new Handler;
@@ -23,7 +23,7 @@ class HandlerTest extends TestCase
     }
 
     #[Test]
-    public function itGetsTheWriter(): void
+    public function it_gets_the_writer(): void
     {
         $writer = new Writer;
         $handler = new Handler($writer);
