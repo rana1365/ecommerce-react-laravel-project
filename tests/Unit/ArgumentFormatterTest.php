@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 class ArgumentFormatterTest extends TestCase
 {
     #[Test]
-    public function itFormatsAString(): void
+    public function it_formats_a_string(): void
     {
         $argumentFormatter = new ArgumentFormatter;
 
@@ -23,7 +23,7 @@ class ArgumentFormatterTest extends TestCase
     }
 
     #[Test]
-    public function itFormatsALongString(): void
+    public function it_formats_a_long_string(): void
     {
         $argumentFormatter = new ArgumentFormatter;
 
@@ -35,7 +35,7 @@ class ArgumentFormatterTest extends TestCase
     }
 
     #[Test]
-    public function itFormatsAArray(): void
+    public function it_formats_a_array(): void
     {
         $argumentFormatter = new ArgumentFormatter;
 
@@ -47,7 +47,7 @@ class ArgumentFormatterTest extends TestCase
     }
 
     #[Test]
-    public function itFormatsAObject(): void
+    public function it_formats_a_object(): void
     {
         $argumentFormatter = new ArgumentFormatter;
 

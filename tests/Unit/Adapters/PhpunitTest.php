@@ -12,7 +12,7 @@ use Symfony\Component\Process\Process;
 class PhpunitTest extends TestCase
 {
     #[Test]
-    public function itIsAPrinter(): void
+    public function it_is_a_printer(): void
     {
         $this->assertInstanceOf(DefaultPrinter::class, new DefaultPrinter(true));
     }
@@ -33,7 +33,7 @@ class PhpunitTest extends TestCase
     }
 
     #[Test]
-    public function itHasTests(): void
+    public function it_has_tests(): void
     {
         $output = $this->runCollisionTests([
             '--exclude-group',
@@ -59,7 +59,7 @@ EOF,
     }
 
     #[Test]
-    public function itHasCustomTestCaseName(): void
+    public function it_has_custom_test_case_name(): void
     {
         $output = $this->runCollisionTests([
             '--group',
@@ -78,7 +78,7 @@ EOF,
     }
 
     #[Test]
-    public function itPrintedUnexpectedOutput(): void
+    public function it_printed_unexpected_output(): void
     {
         $output = $this->runCollisionTests([
             '--group',
@@ -98,7 +98,7 @@ EOF,
     }
 
     #[Test]
-    public function itHasATodo(): void
+    public function it_has_a_todo(): void
     {
         $output = $this->runCollisionTests([
             '--group',
@@ -117,7 +117,7 @@ EOF,
     }
 
     #[Test]
-    public function itHasRecap(): void
+    public function it_has_recap(): void
     {
         $output = $this->runCollisionTests([
             '--exclude-group',
@@ -136,7 +136,7 @@ EOF,
     }
 
     #[Test]
-    public function itHasRecapWithRandomOrderSeed(): void
+    public function it_has_recap_with_random_order_seed(): void
     {
         $output = $this->runCollisionTests([
             '--order-by=random',
@@ -152,7 +152,7 @@ EOF,
     }
 
     #[Test]
-    public function itInformsTheUserWhenNoTestsAreExecuted(): void
+    public function it_informs_the_user_when_no_tests_are_executed(): void
     {
         $output = $this->runCollisionTests([
             '--filter',
@@ -166,7 +166,7 @@ EOF,
     }
 
     #[Test]
-    public function itHasFailure(): void
+    public function it_has_failure(): void
     {
         $output = $this->runCollisionTests([], 1);
 
@@ -226,7 +226,7 @@ EOF;
     }
 
     #[Test]
-    public function itHasOutputInStdoutWithBeStrictAboutOutputDuringTestsFalse(): void
+    public function it_has_output_in_stdout_with_be_strict_about_output_during_tests_false(): void
     {
         if (! file_exists('./vendor/bin/pest')) {
             $this->markTestSkipped('Pest is not installed.');

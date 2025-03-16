@@ -14,7 +14,7 @@ use Whoops\RunInterface;
 class ProviderTest extends TestCase
 {
     #[Test]
-    public function itRegistersTheErrorHandler(): void
+    public function it_registers_the_error_handler(): void
     {
         $handler = new Handler;
 
@@ -32,7 +32,7 @@ class ProviderTest extends TestCase
     }
 
     #[Test]
-    public function itGetsTheHandler(): void
+    public function it_gets_the_handler(): void
     {
         $handler = new Handler;
         $provider = new Provider(new Run, $handler);

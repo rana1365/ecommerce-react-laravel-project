@@ -22,7 +22,7 @@ use Whoops\Exception\Inspector;
 class WriterTest extends TestCase
 {
     #[Test]
-    public function itGetsTheOutput(): void
+    public function it_gets_the_output(): void
     {
         $writer = new Writer(new NullSolutionsRepository, $output = new ConsoleOutput);
 
@@ -30,7 +30,7 @@ class WriterTest extends TestCase
     }
 
     #[Test]
-    public function itSetsTheOutput(): void
+    public function it_sets_the_output(): void
     {
         $writer = (new Writer)->setOutput($output = new ConsoleOutput);
 
@@ -38,7 +38,7 @@ class WriterTest extends TestCase
     }
 
     #[Test]
-    public function itWritesTheException(): void
+    public function it_writes_the_exception(): void
     {
         $inspector = new Inspector(HelloWorldFile1::say());
 
@@ -78,7 +78,7 @@ EOF;
     }
 
     #[Test]
-    public function itWritesDetails(): void
+    public function it_writes_details(): void
     {
         $inspector = new Inspector(HelloWorldFile1::say());
 
@@ -117,7 +117,7 @@ EOF;
     }
 
     #[Test]
-    public function itIgnoresClosures(): void
+    public function it_ignores_closures(): void
     {
         $inspector = new Inspector(HelloWorldFile1::say());
 
@@ -144,7 +144,7 @@ EOF;
     }
 
     #[Test]
-    public function itIgnoresFolders(): void
+    public function it_ignores_folders(): void
     {
         $inspector = new Inspector(HelloWorldFile1::say());
 
@@ -170,7 +170,7 @@ EOF;
     }
 
     #[Test]
-    public function itHidesEditor(): void
+    public function it_hides_editor(): void
     {
         $inspector = new Inspector(HelloWorldFile1::say());
 
@@ -200,7 +200,7 @@ EOF;
     }
 
     #[Test]
-    public function itHidesTrace(): void
+    public function it_hides_trace(): void
     {
         $inspector = new Inspector(HelloWorldFile1::say());
 
@@ -235,7 +235,7 @@ EOF;
     }
 
     #[Test]
-    public function itSupportsRenderlessContracts(): void
+    public function it_supports_renderless_contracts(): void
     {
         $inspector = new Inspector(HelloWorldFile4::say());
 
@@ -255,7 +255,7 @@ EOF;
     }
 
     #[Test]
-    public function itSupportsCustomEditorContracts(): void
+    public function it_supports_custom_editor_contracts(): void
     {
         $inspector = new Inspector(HelloWorldFile5::say());
 
