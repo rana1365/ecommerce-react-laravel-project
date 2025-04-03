@@ -6,6 +6,7 @@ namespace Tests\Unit\Adapters;
 
 use NunoMaduro\Collision\Adapters\Phpunit\Printers\DefaultPrinter;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\Process;
 
@@ -245,19 +246,29 @@ EOF;
 
         $process->run();
 
-        $basePath = getcwd();
+        $output = $process->getOutput();
 
-        $this->assertConsoleOutputContainsString(<<<OUTPUT
+        try {
+            $this->assertConsoleOutputContainsString(<<<OUTPUT
 
-   WARN  TestCaseWithStdoutOutput\OutputTest
-  ! with output → This test printed output: Foo
-  ✓ nothing special
-  ✓ with no output
+               WARN  TestCaseWithStdoutOutput\OutputTest
+              ! with output → This test printed output: Foo
+              ✓ nothing special
+              ✓ with no output
 
-  Tests:    1 risky, 2 passed (3 assertions)
-OUTPUT
-            , $process->getOutput()
-        );
+              Tests:    1 risky, 2 passed (3 assertions)
+            OUTPUT, $output);
+        } catch (ExpectationFailedException) {
+            $this->assertConsoleOutputContainsString(<<<OUTPUT
+
+               WARN  TestCaseWithStdoutOutput\OutputTest
+              ! with output → Test code or tested code printed unexpected output: Foo
+              ✓ nothing special
+              ✓ with no output
+
+              Tests:    1 risky, 2 passed (3 assertions)
+            OUTPUT, $output);
+        }
 
         $this->assertConsoleOutputNotContainsString(
             'Bar',
