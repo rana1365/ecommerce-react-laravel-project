@@ -195,6 +195,10 @@ EOF
 
     private function runCollisionTests(array $arguments = [], int $exitCode = 0): string
     {
+        if (! file_exists('./vendor/bin/pest')) {
+            $this->markTestSkipped('Pest is not installed.');
+        }
+
         $process = new Process(array_merge([
             './vendor/pestphp/pest/bin/pest',
             '-c',
@@ -224,6 +228,10 @@ EOF;
     #[Test]
     public function it_has_output_in_stdout_with_be_strict_about_output_during_tests_false(): void
     {
+        if (! file_exists('./vendor/bin/pest')) {
+            $this->markTestSkipped('Pest is not installed.');
+        }
+
         $process = new Process([
             './vendor/bin/pest',
             '-c',

@@ -68,13 +68,15 @@ class ArtisanTestCommandTest extends TestCase
     #[Test]
     public function test_env(): void
     {
-        $this->runTests([
-            './vendor/bin/pest',
-            '-c',
-            'tests/LaravelApp/phpunit.xml',
-            '--group',
-            'environment',
-        ]);
+        if (file_exists('./vendor/bin/pest')) {
+            $this->runTests([
+                './vendor/bin/pest',
+                '-c',
+                'tests/LaravelApp/phpunit.xml',
+                '--group',
+                'environment',
+            ]);
+        }
 
         $this->runTests(['./tests/LaravelApp/artisan', 'test', '--group', 'environment']);
 
@@ -92,13 +94,15 @@ VAR_OVERRIDDEN_IN_PHPUNIT=VAL_THAT_SHOULD_BE_OVERRIDDEN
 EOF
         );
 
-        $this->runTests([
-            './vendor/bin/pest',
-            '-c',
-            'tests/LaravelApp/phpunit.xml',
-            '--group',
-            'environmentTesting',
-        ]);
+        if (file_exists('./vendor/bin/pest')) {
+            $this->runTests([
+                './vendor/bin/pest',
+                '-c',
+                'tests/LaravelApp/phpunit.xml',
+                '--group',
+                'environmentTesting',
+            ]);
+        }
 
         $this->runTests(['./tests/LaravelApp/artisan', 'test', '--group', 'environmentTesting']);
 
@@ -116,13 +120,16 @@ EOF
     #[Test]
     public function test_extendable_custom_variables(): void
     {
-        $this->runTests([
-            './vendor/bin/pest',
-            '-c',
-            'tests/LaravelApp/phpunit.xml',
-            '--group',
-            'environmentNoCVPhpunit',
-        ]);
+
+        if (file_exists('./vendor/bin/pest')) {
+            $this->runTests([
+                './vendor/bin/pest',
+                '-c',
+                'tests/LaravelApp/phpunit.xml',
+                '--group',
+                'environmentNoCVPhpunit',
+            ]);
+        }
 
         // Without Custom Variables (-c|--custom-argument)
         $this->runTests(['./tests/LaravelApp/artisan', 'test', '--group', 'environmentNoCVPhpunit']);
@@ -177,6 +184,10 @@ EOF;
     #[Test]
     public function test_profile(): void
     {
+        if (! file_exists('./vendor/bin/pest')) {
+            $this->markTestSkipped('Pest is not installed.');
+        }
+
         $output = $this->runTests([
             './vendor/bin/pest',
             '--profile',
