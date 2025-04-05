@@ -21,6 +21,7 @@
     </head>
     <body>
         <h2> Welcome to Laravel 12 </h2>
+        <h2> Welcome to Laravel and React </h2>
 
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
