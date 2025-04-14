@@ -4,8 +4,12 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductImage;
+use App\Models\TempImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ProductController extends Controller
 {
@@ -55,6 +59,39 @@ class ProductController extends Controller
         $product->status = $request->status;
         $product->is_featured = $request->is_featured;
         $product->save();
+
+        // Save the product images
+        if (!empty($request->gallery)) {
+           foreach ($request->gallery as $key => $tempImageId) {
+            $tempImage = TempImage::find($tempImageId);
+
+            // Large Thumbnail generation
+            $extArray = explode('.', $tempImage->name);
+            $ext = end($extArray);
+            $imageName = $product->id.'-'.time().'.'.$ext; // Ex: 02-123456.jpg
+            $manager = new ImageManager(Driver::class);
+            $img = $manager->read(public_path('uploads/temp/' .$tempImage->name));
+            $img->scaleDown(1200);
+            $img->save(public_path('uploads/products/large/' .$imageName));
+
+            // Small thumbnail generation
+            $manager = new ImageManager(Driver::class);
+            $img = $manager->read(public_path('uploads/temp/' .$tempImage->name));
+            $img->coverDown(400,460);
+            $img->save(public_path('uploads/products/small/' .$imageName));
+
+            $productImage = new ProductImage();
+            $productImage->image = $imageName;
+            $productImage->product_id = $product->id;
+            $productImage->save();
+
+            if ($key == 0) {
+                $product->image = $imageName;
+                $product->save();
+            }
+
+           } 
+        }
 
         return response()->json([
             'status' => 200,
