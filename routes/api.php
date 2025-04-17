@@ -17,6 +17,12 @@ Route::get('latest-products', [FrontProductController::class, 'latestProducts'])
 
 Route::get('featured-products', [FrontProductController::class, 'featuredProducts']);
 
+Route::get('get-products', [FrontProductController::class, 'getProducts']);
+
+Route::get('get-categories', [FrontProductController::class, 'getCategories']);
+
+Route::get('get-brands', [FrontProductController::class, 'getBrands']);
+
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
