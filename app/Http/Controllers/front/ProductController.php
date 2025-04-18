@@ -28,6 +28,7 @@ class ProductController extends Controller
             $products = $products->whereIn('brand_id', $brandArray);
         }
         
+        
         $products = $products->get();
 
         return response()->json([
@@ -37,6 +38,7 @@ class ProductController extends Controller
 
     }
 
+    // This method will return lates products
     public function latestProducts ()
     {
         $products = Product::orderBy('created_at', 'DESC')
@@ -50,6 +52,7 @@ class ProductController extends Controller
         ], 200);
     }
 
+    // This method will return featured products
     public function featuredProducts ()
     {
         $products = Product::orderBy('created_at', 'DESC')
@@ -65,6 +68,7 @@ class ProductController extends Controller
     }
 
 
+    // This method will fetch all categories
     public function getCategories ()
     {
         $categories = Category::orderBy('name', 'ASC')
@@ -78,6 +82,7 @@ class ProductController extends Controller
     }
 
 
+    // This method will fetch all brands
     public function getBrands ()
     {
         $brands = Brand::orderBy('name', 'ASC')
@@ -87,6 +92,24 @@ class ProductController extends Controller
         return response()->json([
             'status' => 200,
             'data' => $brands,
+        ], 200);
+    }
+
+    public function getProduct ($id)
+    {
+        $product = Product::with('product_images', 'product_sizes.size')
+                    ->find($id);
+
+        if ($product == null) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Product not found',
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => 200,
+            'data' => $product,
         ], 200);
     }
 

@@ -23,6 +23,8 @@ Route::get('get-categories', [FrontProductController::class, 'getCategories']);
 
 Route::get('get-brands', [FrontProductController::class, 'getBrands']);
 
+Route::get('get-product/{id}', [FrontProductController::class, 'getProduct']);
+
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
