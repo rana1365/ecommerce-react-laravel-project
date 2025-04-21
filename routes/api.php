@@ -3,11 +3,12 @@
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\front\OrderController as FrontOrderController;
+use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SizeController;
 use App\Http\Controllers\front\AccountController;
 use App\Http\Controllers\front\ProductController as FrontProductController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TempImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +34,9 @@ Route::post('login', [AccountController::class, 'authenticate']);
 
 Route::group(['middleware' => ['auth:sanctum', 'checkUserRole']], function () {
 
-    Route::post('save-order', [OrderController::class, 'saveOrder']);
+    Route::post('save-order', [FrontOrderController::class, 'saveOrder']);
+
+    Route::get('get-order-details/{id}', [AccountController::class, 'getOrderDetails']);
 });
 
 // Route::get('/user', function (Request $request) {
@@ -62,5 +65,9 @@ Route::group(['middleware' => ['auth:sanctum', 'checkAdminRole']], function () {
     Route::get('change-product-default-image', [ProductController::class, 'updateDefaultImage']);
 
     Route::delete('delete-product-image/{id}', [ProductController::class, 'deleteProductImage']);
+
+    Route::get('orders', [OrderController::class, 'index']);
+
+    Route::get('orders/{id}', [OrderController::class, 'details']);
 
 });
