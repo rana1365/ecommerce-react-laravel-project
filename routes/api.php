@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\front\OrderController as FrontOrderController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\ShippingController;
 use App\Http\Controllers\admin\SizeController;
 use App\Http\Controllers\front\AccountController;
 use App\Http\Controllers\front\ProductController as FrontProductController;
@@ -32,18 +33,21 @@ Route::post('register', [AccountController::class, 'register']);
 
 Route::post('login', [AccountController::class, 'authenticate']);
 
+// Customer/user routes
 Route::group(['middleware' => ['auth:sanctum', 'checkUserRole']], function () {
 
     Route::post('save-order', [FrontOrderController::class, 'saveOrder']);
 
     Route::get('get-order-details/{id}', [AccountController::class, 'getOrderDetails']);
+
+    Route::get('get-orders', [AccountController::class, 'getOrders']);
 });
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
-
+// Admin routes
 Route::group(['middleware' => ['auth:sanctum', 'checkAdminRole']], function () {
     
     Route::get('categories', [CategoryController::class, 'index']);
@@ -69,5 +73,11 @@ Route::group(['middleware' => ['auth:sanctum', 'checkAdminRole']], function () {
     Route::get('orders', [OrderController::class, 'index']);
 
     Route::get('orders/{id}', [OrderController::class, 'details']);
+
+    Route::post('update-order/{id}', [OrderController::class, 'updateOrder']);
+
+    Route::get('get-shipping', [ShippingController::class, 'getShipping']);
+
+    Route::post('save-shipping', [ShippingController::class, 'updateShipping']);
 
 });
