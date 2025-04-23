@@ -33,15 +33,21 @@ class ShippingController extends Controller
             ], 400);
         }
 
-        $shipping = ShippingCharge::find(1);
-        if ($shipping == null) {
-            $newShipping = new ShippingCharge();
-            $newShipping->shipping_charge = $request->shipping_charge;
-            $newShipping->save();
-        } else {
-            $shipping->shipping_charge = $request->shipping_charge;
-            $shipping->save();
-        }
+        ShippingCharge::updateOrInsert(
+            ['id' => 1], 
+            ['shipping_charge' => $request->shipping_charge]
+        );
+
+        // This method is the detail version of updateOrInsert()
+        // $shipping = ShippingCharge::find(1);
+        // if ($shipping == null) {
+        //     $newShipping = new ShippingCharge();
+        //     $newShipping->shipping_charge = $request->shipping_charge;
+        //     $newShipping->save();
+        // } else {
+        //     $shipping->shipping_charge = $request->shipping_charge;
+        //     $shipping->save();
+        // }
 
         return response()->json([
             'status' => 200,

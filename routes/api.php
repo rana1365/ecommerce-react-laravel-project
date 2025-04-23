@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\ShippingController;
 use App\Http\Controllers\admin\SizeController;
 use App\Http\Controllers\front\AccountController;
 use App\Http\Controllers\front\ProductController as FrontProductController;
+use App\Http\Controllers\front\ShippingController as FrontShippingController;
 use App\Http\Controllers\TempImageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,8 @@ Route::post('register', [AccountController::class, 'register']);
 
 Route::post('login', [AccountController::class, 'authenticate']);
 
+Route::get('get-shipping-front', [FrontShippingController::class, 'getShipping']);
+
 // Customer/user routes
 Route::group(['middleware' => ['auth:sanctum', 'checkUserRole']], function () {
 
@@ -41,6 +44,8 @@ Route::group(['middleware' => ['auth:sanctum', 'checkUserRole']], function () {
     Route::get('get-order-details/{id}', [AccountController::class, 'getOrderDetails']);
 
     Route::get('get-orders', [AccountController::class, 'getOrders']);
+
+    Route::post('update-profile', [AccountController::class, 'updateProfile']);
 });
 
 // Route::get('/user', function (Request $request) {
