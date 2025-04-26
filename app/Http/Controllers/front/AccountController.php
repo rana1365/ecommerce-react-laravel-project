@@ -166,4 +166,27 @@ class AccountController extends Controller
     }
 
 
+    public function getProfileDtails (Request $request)
+    {
+        $user = User::find($request->user()->id);
+
+        if ($user == null) {
+            
+            return response()->json([
+                'status' => 404,
+                'message' => 'User not found',
+                'data' => [],
+            ], 404);
+
+        } else {
+
+            return response()->json([
+                'status' => 200,
+                'data' => $user,
+            ], status: 200);
+
+        }
+    }
+
+
 }
